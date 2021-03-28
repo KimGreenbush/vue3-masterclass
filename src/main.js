@@ -1,5 +1,20 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import PageHome from "@/components/PageHome"
+import { createRouter, createWebHistory } from "vue-router"
+
+const routes = [
+    {
+        path: "/",
+        name: "Home",
+        component: PageHome
+    }
+]
+
+const router = createRouter({
+	history: createWebHistory(),
+	routes,
+});
 
 // extract app instance to a variable for isolation && customization before mounting (plugins, etc.)
 const firstApp = createApp(App)
@@ -10,7 +25,7 @@ const firstApp = createApp(App)
 // firstApp.component( name: "aButton", component: {})
 
 //plugins:
-// firstApp.use(aPlugin)
+firstApp.use(router)
 
 firstApp.mount('#app')
 
