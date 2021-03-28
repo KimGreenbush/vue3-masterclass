@@ -1,5 +1,6 @@
 <template>
   <div class="col-large push-top">
+    <router-link :to="{name: 'Home'}">Back to Threads</router-link>
     <h1>{{ thread.title }}</h1>
 
     <div class="post-list">
