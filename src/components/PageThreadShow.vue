@@ -17,7 +17,7 @@
             />
           </a>
 
-          <p class="desktop-only text-small">107 posts</p>
+          <p class="desktop-only text-small">{{userPostNum(postById(postId).userId)}} posts</p>
         </div>
 
         <div class="post-content">
@@ -65,6 +65,9 @@ export default {
     userById(userId) {
       return this.users.find((u) => u.id === userId);
     },
+    userPostNum(userId) {
+      return this.posts.filter(u => u.userId === userId).length
+    }
   },
 };
 </script>
