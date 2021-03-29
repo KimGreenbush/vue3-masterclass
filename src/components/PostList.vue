@@ -27,8 +27,8 @@
         </div>
       </div>
 
-      <div class="post-date text-faded">
-        {{ post.publishedAt }}
+      <div class="post-date text-faded" :title="humanDate(post.publishedAt)">
+        {{ diffForHumans(post.publishedAt) }}
       </div>
     </div>
   </div>
@@ -36,6 +36,11 @@
 
 <script>
 import sourceData from "@/data.json";
+import dayjs from "dayjs"
+import relativeTime from "dayjs/plugin/relativeTime"
+import localDateTime from "dayjs/plugin/localizedFormat"
+dayjs.extend(relativeTime)
+dayjs.extend(localDateTime)
 
 export default {
   props: {
@@ -55,7 +60,13 @@ export default {
     },
     userPostNum(userId) {
       return sourceData.posts.filter(u => u.userId === userId).length
-    }
+    },
+    diffForHumans(timestamp) {
+      return dayjs.unix(timestamp).fromNow()
+    },
+    humanDate(timestamp) {
+      return dayjs.unix(timestamp).format("llll")
+    },
   },
 };
 </script>
