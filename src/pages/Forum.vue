@@ -1,6 +1,7 @@
 <template>
 
     <div class="col-full push-top">
+      <router-link :to="{ name: 'Home' }">Back to Home</router-link>
 
       <div class="forum-header">
         <div class="forum-details">
