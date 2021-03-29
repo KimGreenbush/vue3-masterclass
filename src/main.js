@@ -8,7 +8,16 @@ const firstApp = createApp(App)
 // CUSTOMIZATIONS 1
 
 // global components:
-// firstApp.component( name: "aButton", component: {})
+// firstApp.component("AppDate", AppDate)
+// regex method to look in /components for App"Name" files
+const requireComponent = require.context("./components", true, /App[A-Z]\w+\.(vue|js)$/);
+requireComponent.keys().forEach(function(fileName) {
+	let baseComponentConfig = requireComponent(fileName);
+	baseComponentConfig = baseComponentConfig.default || baseComponentConfig;
+	const baseComponentName = baseComponentConfig.name || fileName.replace(/^.+\//, "").replace(/\.\w+$/, "");
+	firstApp.component(baseComponentName, baseComponentConfig);
+});
+
 
 //plugins:
 firstApp.use(router)
