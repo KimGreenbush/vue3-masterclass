@@ -1,6 +1,6 @@
 <template>
   <div class="col-large push-top">
-    <router-link :to="{ name: 'Home' }">Back to Threads</router-link>
+    <router-link :to="{ name: 'Forum', params: {id: thread.forumId} }">Back to Forum</router-link>
     <h1>{{ thread.title }}</h1>
 
     <PostList :posts="threadPosts" />
