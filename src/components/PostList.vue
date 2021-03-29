@@ -36,7 +36,6 @@
 </template>
 
 <script>
-import sourceData from "@/data.json";
 
 export default {
   name: "PostList",
@@ -46,17 +45,17 @@ export default {
       type: Array
     }
   },
-  data() {
-    return {
-      users: sourceData.users,
-    };
+  computed: {
+    users () {
+      return this.$store.state.users
+    }
   },
   methods: {
     userById(userId) {
       return this.users.find((u) => u.id === userId);
     },
     userPostNum(userId) {
-      return sourceData.posts.filter(u => u.userId === userId).length
+      return this.$store.state.posts.filter(u => u.userId === userId).length
     },
   },
 };

@@ -1,6 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from "@/router" // direct import since file is named "index"
+import store from "@/store" // direct import since file is named "index"
 
 // extract app instance to a variable for isolation && customization before mounting (plugins, etc.)
 const firstApp = createApp(App)
@@ -21,6 +22,7 @@ requireComponent.keys().forEach(function(fileName) {
 
 //plugins:
 firstApp.use(router)
+firstApp.use(store)
 
 firstApp.mount('#app')
 

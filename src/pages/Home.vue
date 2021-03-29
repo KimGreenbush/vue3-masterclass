@@ -5,18 +5,17 @@
 
 <script>
 import CategoryList from "@/components/CategoryList";
-import sourceData from "@/data.json";
 
 export default {
   name: "Home",
   components: {
     CategoryList,
   },
-  data() {
-    return {
-      categories: sourceData.categories,
-    };
-  },
+  computed: {
+    categories() {
+      return this.$store.state.categories
+    }
+  }
 };
 </script>
 
