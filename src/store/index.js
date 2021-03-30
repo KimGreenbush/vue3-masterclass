@@ -1,11 +1,17 @@
-import { createStore } from "vuex"
-import sourceData from "@/data"
+import { createStore } from "vuex";
+import sourceData from "@/data";
 
 export default createStore({
-	state: sourceData,
+	state: {
+		...sourceData,
+		authId: "ALXhxjwgY9PinwNGHpfai6OWyDu2",
+	},
+	getters: {
+		authUser: (state) => state.users.find((user) => user.id === state.authId),
+	},
 	actions: {
-        createPost(context, post) {
-            post.id = "ggg" + Math.random();
+		createPost(context, post) {
+			post.id = "ggg" + Math.random();
 			context.commit("setPost", { post }); //set post
 			context.commit("appendPostToThread", { postId: post.id, threadId: post.threadId }); //append post to thread
 		},

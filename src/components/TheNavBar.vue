@@ -15,7 +15,7 @@
     <nav class="navbar">
       <ul>
         <li class="navbar-user">
-          <a href="#">
+          <router-link :to="{name: 'Profile'}">
             <img
               class="avatar-small"
               :src="authUser.avatar"
@@ -29,7 +29,7 @@
                 alt=""
               />
             </span>
-          </a>
+          </router-link>
 
           <!-- dropdown menu -->
           <!-- add class "active-drop" to show the dropdown -->
@@ -74,6 +74,7 @@
 import {mapGetters} from "vuex"
 
 export default {
+  name: "NavBar",
   computed: {
     ...mapGetters(["authUser"])
   }

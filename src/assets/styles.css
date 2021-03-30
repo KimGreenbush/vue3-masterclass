@@ -726,7 +726,7 @@ textarea#user_bio {
 }
 
 span.offline::before {
-    font-family: FontAwesome;
+    font-family: "Font Awesome 5 Free";
     content: "\f1db";
     font-size: 14px;
     margin-right: 5px;
@@ -737,7 +737,7 @@ span.online {
 }
 
 span.online::before {
-    font-family: FontAwesome;
+    font-family: "Font Awesome 5 Free";
     content: "\f2be";
     font-size: 14px;
     margin-right: 5px;
