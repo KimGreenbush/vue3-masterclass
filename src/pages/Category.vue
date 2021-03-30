@@ -1,5 +1,4 @@
 <template>
-  <router-link :to="{name: 'Home'}">Back to Home</router-link>
   <h1>{{category.name}}</h1>
   <ForumList
   :forums="getForumsForCategory(category)"
