@@ -40,10 +40,7 @@ export default {
   },
   methods: {
     addPost(eventData) {
-      const post = {
-        ...eventData.post,
-        threadId: this.id,
-      };
+      const post = { ...eventData.post, threadId: this.id };
       this.$store.dispatch("createPost", post)
     },
   },
