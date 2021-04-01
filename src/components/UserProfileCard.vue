@@ -17,8 +17,8 @@
     <span class="online">{{ user.username }} is Online.</span>
 
     <div class="stats">
-      <span>{{ userPostsCount }} posts</span>
-      <span>{{ userThreadsCount }} threads</span>
+      <span>{{ user.postsCount }} posts</span>
+      <span>{{ user.threadsCount }} threads</span>
     </div>
 
     <hr />
@@ -30,7 +30,6 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex"
 
 export default {
   name: "UserProfileCard",
@@ -39,9 +38,6 @@ export default {
       type: Object,
       required: true
     }
-  },
-  computed: {
-    ...mapGetters({ user: "authUser"})
   },
 };
 </script>
