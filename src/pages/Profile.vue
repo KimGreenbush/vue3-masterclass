@@ -5,6 +5,7 @@
       <div class="col-3 push-top">
 
         <UserProfileCard :user="user" />
+        <UserProfileCardEditor :user="user" />
 
         <p class="text-xsmall text-faded text-center">
           <AppDate :timestamp="user.registeredAt" />
@@ -36,13 +37,15 @@
 <script>
 import PostList from "@/components/PostList"
 import UserProfileCard from "@/components/UserProfileCard"
+import UserProfileCardEditor from "@/components/UserProfileCardEditor"
 import {mapGetters} from "vuex"
 
 export default {
   name: "Profile",
   components: {
     PostList,
-    UserProfileCard
+    UserProfileCard,
+    UserProfileCardEditor
   },
   computed: {
     ...mapGetters({ user: "authUser"})
