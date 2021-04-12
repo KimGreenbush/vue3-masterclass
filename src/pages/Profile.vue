@@ -4,19 +4,12 @@
 
       <div class="col-3 push-top">
 
-        <UserProfileCard :user="user" />
-        <UserProfileCardEditor :user="user" />
+        <UserProfileCard v-if="!edit" :user="user" />
+        <UserProfileCardEditor v-else :user="user" />
 
         <p class="text-xsmall text-faded text-center">
           <AppDate :timestamp="user.registeredAt" />
         </p>
-
-        <div class="text-center">
-          <hr />
-          <a href="edit-profile.html" class="btn-green btn-small"
-            >Edit Profile</a
-          >
-        </div>
       </div>
 
       <div class="col-7 push-top">
@@ -46,6 +39,12 @@ export default {
     PostList,
     UserProfileCard,
     UserProfileCardEditor
+  },
+  props: {
+    edit: {
+      type: Boolean,
+      default: false
+    }
   },
   computed: {
     ...mapGetters({ user: "authUser"})
