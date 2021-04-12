@@ -16,6 +16,8 @@
 
     <span class="online">{{ user.username }} is Online.</span>
 
+    <p class="text-justify">{{ user.location }}</p>
+
     <div class="stats">
       <span>{{ user.postsCount }} posts</span>
       <span>{{ user.threadsCount }} threads</span>
@@ -26,6 +28,12 @@
     <p v-if="user.website" class="text-large text-center">
       <i class="fa fa-globe"></i> <a :href="user.website">{{ user.website }}</a>
     </p>
+
+        <div class="text-center">
+          <hr />
+          <router-link :to="{name: 'ProfileEdit'}" class="btn-green btn-small"
+            >Edit Profile</router-link>
+        </div>
   </div>
 </template>
 
