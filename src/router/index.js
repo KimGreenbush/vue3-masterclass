@@ -11,13 +11,13 @@ const routes = [
 	{
 		path: "/",
 		name: "Home",
-		component: Home
+		component: Home,
 	},
 	{
 		path: "/profile",
 		name: "Profile",
 		component: Profile,
-		meta: { toTop: true, smoothScroll: true }
+		meta: { toTop: true, smoothScroll: true },
 	},
 	{
 		path: "/profile/edit",
@@ -29,7 +29,7 @@ const routes = [
 		path: "/category/:id",
 		name: "Category",
 		component: Category,
-		props: true
+		props: true,
 	},
 	{
 		path: "/forum/:id",
@@ -42,12 +42,12 @@ const routes = [
 		name: "ThreadShow",
 		component: ThreadShow,
 		props: true,
-		beforeEnter (to, from, next) {
+		beforeEnter(to, from, next) {
 			// check if thread exists
-			const threadExists = sourceData.threads.find(t => t.id === to.params.id)
+			const threadExists = sourceData.threads.find((t) => t.id === to.params.id);
 			// if exists
 			if (threadExists) {
-				return next()
+				return next();
 			}
 			// if Not Found
 			else {
@@ -55,27 +55,26 @@ const routes = [
 					name: "NotFound",
 					params: { pathMatch: to.path.substring(1).split("/") },
 					query: to.query,
-					hash: to.hash
-				})
+					hash: to.hash,
+				});
 			}
-		}
+		},
 	},
 	{
 		path: "/:pathMatch(.*)*",
 		name: "NotFound",
-		component:
-	NotFound
+		component: NotFound,
 	},
 ];
 
-export default  createRouter({
+export default createRouter({
 	history: createWebHistory(),
 	routes,
 	scrollBehavior(to) {
-		const scroll = {}
+		const scroll = {};
 		// one like if statement
-		if (to.meta.toTop) scroll.top = 0
-		if (to.meta.smoothScroll) scroll.behavior = "smooth"
-		return scroll
-	}
+		if (to.meta.toTop) scroll.top = 0;
+		if (to.meta.smoothScroll) scroll.behavior = "smooth";
+		return scroll;
+	},
 });
