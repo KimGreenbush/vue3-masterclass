@@ -13,9 +13,7 @@
 
       <div class="btn-group">
         <button class="btn btn-ghost">Cancel</button>
-        <button class="btn btn-blue" type="submit" name="Publish">
-          Publish
-        </button>
+        <button class="btn btn-blue" type="submit" name="Publish">Publish</button>
       </div>
     </form>
   </div>
@@ -33,8 +31,6 @@ export default {
     save() {
       const post = {
         text: this.newPostText,
-        publishedAt: Math.floor(Date.now() / 1000),
-        userId: "Miej9zSGMRZKDvMXzfxjVOyv3RF3",
       };
       this.$emit("save", { post }); // accessible object with kv pair: eventData.post
       this.newPostText = "";
