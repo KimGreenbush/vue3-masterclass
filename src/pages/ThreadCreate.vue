@@ -1,8 +1,6 @@
 <template>
   <div class="col-full push-top">
-    <h1>
-      Create new thread in <i>{{ forum.name }}</i>
-    </h1>
+    <h1>Create new thread in <i>{{ forum.name }}</i></h1>
 
     <form @submit.prevent="save">
       <div class="form-group">
@@ -37,6 +35,7 @@
     </form>
   </div>
 </template>
+
 <script>
 export default {
   props: {
