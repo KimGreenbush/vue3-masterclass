@@ -1,13 +1,30 @@
 <template>
-  <div class="col-full">
+  <div class="col-full push-top">
+    <h1>
+      Create new thread in <i>{{ forum.name }}</i>
+    </h1>
+
     <form @submit.prevent="save">
+      <div class="form-group">
+        <label for="thread_title">Title:</label>
+        <input
+          v-model="title"
+          type="text"
+          id="thread_title"
+          class="form-input"
+          name="title"
+        />
+      </div>
+
       <div class="form-group">
         <label for="thread_content">Content:</label>
         <textarea
+          v-model="text"
           id="thread_content"
           class="form-input"
           name="content"
-          v-model="newPostText"
+          rows="8"
+          cols="140"
         ></textarea>
       </div>
 
@@ -20,22 +37,20 @@
     </form>
   </div>
 </template>
-
 <script>
 export default {
-  name: "PostEditor",
+  props: {
+    forum: { type: Object, required: true },
+  },
   data() {
     return {
-      newPostText: "",
+      title: "",
+      text: "",
     };
   },
   methods: {
     save() {
-      const post = {
-        text: this.newPostText,
-      };
-      this.$emit("save", { post }); // accessible object with kv pair: eventData.post
-      this.newPostText = "";
+      // dispatch a vuex action
     },
   },
 };

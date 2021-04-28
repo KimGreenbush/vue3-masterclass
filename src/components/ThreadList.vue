@@ -6,15 +6,20 @@
       <div v-for="thread in threads" :key="thread.id" class="thread">
         <div>
           <p>
-            <router-link :to="{name: 'ThreadShow', params: { id: thread.id}}">{{thread.title}}</router-link>
+            <router-link
+              :to="{ name: 'ThreadShow', params: { id: thread.id } }"
+            >
+              {{ thread.title }}
+            </router-link>
           </p>
           <p class="text-faded text-xsmall">
-            By <a href="#">{{userById(thread.userId).name}}</a>, <AppDate :timestamp="thread.publishedAt" />.
+            By <a href="#">{{ userById(thread.userId).name }}</a>,
+            <AppDate :timestamp="thread.publishedAt" />.
           </p>
         </div>
 
         <div class="activity">
-          <p class="replies-count">{{thread.posts.length}} replies</p>
+          <p class="replies-count">{{ thread.posts.length }} replies</p>
 
           <img
             class="avatar-medium"
@@ -24,34 +29,36 @@
 
           <div>
             <p class="text-xsmall">
-              <a href="#">{{userById(postById(thread.lastPostId).userId).username}}</a>
+              <a href="#">
+                {{ userById(postById(thread.lastPostId).userId).username }}
+              </a>
             </p>
-            <p class="text-xsmall text-faded"><AppDate :timestamp="thread.lastPostAt" /></p>
+            <p class="text-xsmall text-faded">
+              <AppDate :timestamp="thread.lastPostAt" />
+            </p>
           </div>
         </div>
       </div>
-
     </div>
-
   </div>
 </template>
 
 <script>
 export default {
   name: "ThreadList",
-  props : {
-    threads : {
-      type : Array,
-      required: true
-    }
+  props: {
+    threads: {
+      type: Array,
+      required: true,
+    },
   },
   computed: {
-    posts () {
-      return this.$store.state.posts
+    posts() {
+      return this.$store.state.posts;
     },
-    users () {
-      return this.$store.state.users
-    }
+    users() {
+      return this.$store.state.users;
+    },
   },
   methods: {
     postById(postId) {

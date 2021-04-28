@@ -2,9 +2,7 @@
   <div class="post-list">
     <div class="post" v-for="post in posts" :key="post.id">
       <div class="user-info">
-        <a href="#" class="user-name">{{
-          userById(post.userId).name
-        }}</a>
+        <a href="#" class="user-name">{{ userById(post.userId).name }}</a>
 
         <a href="#">
           <img
@@ -30,32 +28,30 @@
       <div class="post-date" text-faded>
         <AppDate :timestamp="post.publishedAt" />
       </div>
-
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
   name: "PostList",
   props: {
     posts: {
       required: true,
-      type: Array
-    }
+      type: Array,
+    },
   },
   computed: {
-    users () {
-      return this.$store.state.users
-    }
+    users() {
+      return this.$store.state.users;
+    },
   },
   methods: {
     userById(userId) {
       return this.users.find((u) => u.id === userId);
     },
     userPostNum(userId) {
-      return this.$store.state.posts.filter(u => u.userId === userId).length
+      return this.$store.state.posts.filter((u) => u.userId === userId).length;
     },
   },
 };

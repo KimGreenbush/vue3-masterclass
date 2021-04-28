@@ -1,6 +1,8 @@
 <template>
   <div class="col-large push-top">
-    <router-link :to="{ name: 'Forum', params: {id: thread.forumId} }">Back to Forum</router-link>
+    <router-link :to="{ name: 'Forum', params: { id: thread.forumId } }">
+      Back to Forum
+    </router-link>
     <h1>{{ thread.title }}</h1>
 
     <PostList :posts="threadPosts" />
@@ -25,11 +27,11 @@ export default {
     },
   },
   computed: {
-    threads () {
-      return this.$store.state.threads
+    threads() {
+      return this.$store.state.threads;
     },
-    posts () {
-      return this.$store.state.posts
+    posts() {
+      return this.$store.state.posts;
     },
     thread() {
       return this.threads.find((thread) => thread.id === this.id);
@@ -41,7 +43,7 @@ export default {
   methods: {
     addPost(eventData) {
       const post = { ...eventData.post, threadId: this.id };
-      this.$store.dispatch("createPost", post)
+      this.$store.dispatch("createPost", post);
     },
   },
 };

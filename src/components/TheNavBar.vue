@@ -1,6 +1,6 @@
 <template>
   <header class="header" id="header">
-    <router-link :to="{name: 'Home'} " class="logo">
+    <router-link :to="{ name: 'Home' }" class="logo">
       <img src="../assets/svg/vueschool-logo.svg" />
     </router-link>
 
@@ -15,14 +15,14 @@
     <nav class="navbar">
       <ul>
         <li class="navbar-user">
-          <router-link :to="{name: 'Profile'}">
+          <router-link :to="{ name: 'Profile' }">
             <img
               class="avatar-small"
               :src="authUser.avatar"
               alt="`${authUser.name} profile picture`"
             />
             <span>
-              {{authUser.name}}
+              {{ authUser.name }}
               <img
                 class="icon-profile"
                 src="../assets/svg/arrow-profile.svg"
@@ -71,13 +71,13 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex"
+import { mapGetters } from "vuex";
 
 export default {
   name: "NavBar",
   computed: {
-    ...mapGetters(["authUser"])
-  }
+    ...mapGetters(["authUser"]),
+  },
 };
 </script>
 
