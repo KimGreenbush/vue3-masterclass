@@ -30,7 +30,7 @@ export default createStore({
 	},
 	actions: {
 		// deconstructed {commit} out of
-		//				  (context, payload)
+		//				  (       context,        payload)
 		createPost({ commit, state }, post) {
 			post.id = "ggg" + Math.random();
 			post.userId = state.authId;
