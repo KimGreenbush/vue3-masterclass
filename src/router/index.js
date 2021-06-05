@@ -4,6 +4,7 @@ import Forum from "@/pages/Forum";
 import Category from "@/pages/Category";
 import Profile from "@/pages/Profile";
 import ThreadShow from "@/pages/ThreadShow";
+import ThreadCreate from "@/pages/ThreadCreate";
 import NotFound from "@/pages/NotFound";
 import sourceData from "@/data.json";
 
@@ -59,6 +60,13 @@ const routes = [
 				});
 			}
 		},
+	},
+	{
+	//	path: "/thread/create",  this route is a direct route and can go after the prev one due to the updated router WARN: will not older vers of router
+		path: "/form/:forumId/thread/create",
+		name: "ThreadCreate",
+		component: ThreadCreate,
+		props: true,
 	},
 	{
 		path: "/:pathMatch(.*)*",
