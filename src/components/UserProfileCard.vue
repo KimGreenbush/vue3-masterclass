@@ -28,13 +28,18 @@
     <p v-if="user.website" class="text-large text-center">
       <i class="fa fa-globe"></i> <a :href="user.website">{{ user.website }}</a>
     </p>
+  </div>
 
-    <div class="text-center">
-      <hr />
-      <router-link :to="{ name: 'ProfileEdit' }" class="btn-green btn-small">
-        Edit Profile
-      </router-link>
-    </div>
+  <p class="text-xsmall text-faded text-center">
+    <AppDate :timestamp="user.registeredAt" />
+  </p>
+
+  <hr />
+
+  <div class="text-center">
+    <router-link :to="{ name: 'ProfileEdit' }" class="btn-green btn-small">
+      Edit Profile
+    </router-link>
   </div>
 </template>
 

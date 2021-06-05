@@ -4,10 +4,6 @@
       <div class="col-3 push-top">
         <UserProfileCard v-if="!edit" :user="user" />
         <UserProfileCardEditor v-else :user="user" />
-
-        <p class="text-xsmall text-faded text-center">
-          <AppDate :timestamp="user.registeredAt" />
-        </p>
       </div>
 
       <div class="col-7 push-top">
