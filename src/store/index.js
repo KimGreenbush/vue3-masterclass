@@ -66,17 +66,20 @@ export default createStore({
 		appendPostToThread(state, { postId, threadId }) {
 			const thread = state.threads.find((thread) => thread.id === threadId);
 			thread.posts = thread.posts || []; // ensure posts array exists before adding posts
+			thread.lastPostId = postId // update when adding new posts
 			thread.posts.push(postId);
 		},
 		appendThreadToForum(state, {forumId, threadId}) {
 			const forum = state.forums.find((forum) => forum.id === forumId);
 			forum.threads = forum.threads || []; // ensure threads array exists before adding threads
-			forum.posts.push(threadId);
+			forum.lastPostId = state.threads.find((thread) => thread.id === threadId).lastPostId // update when adding new posts
+			forum.threads.push(threadId);
 		},
 		appendThreadToUser(state, {userId, threadId}) {
 			const user = state.users.find((user) => user.id === userId);
 			user.threads = user.threads || []; // ensure threads array exists before adding threads
-			user.posts.push(threadId);
+			user.lastPostId = state.threads.find((thread) => thread.id === threadId).lastPostId // update when adding new posts
+			user.threads.push(threadId);
 		},
 	},
 });
