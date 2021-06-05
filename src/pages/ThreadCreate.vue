@@ -38,8 +38,14 @@
 
 <script>
 export default {
+  name: "ThreadCreate",
   props: {
-    forum: { type: Object, required: true },
+    forumId: { type: String, required: true },
+  },
+  computed: {
+    forum() {
+      return this.$store.state.forums.find(forum => forum.id === this.forumId)
+    }
   },
   data() {
     return {
@@ -50,7 +56,7 @@ export default {
   methods: {
     save() {
       this.$store.dispatch( "createThread", {
-        forumId: this.forum.id,
+        forumId: this.forumId,
         title: this.title,
         text: this.text
       })
