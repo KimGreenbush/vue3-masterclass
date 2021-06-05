@@ -54,12 +54,13 @@ export default {
     };
   },
   methods: {
-    save() {
-      this.$store.dispatch( "createThread", {
+    async save() {
+      const thread = await this.$store.dispatch( "createThread", {
         forumId: this.forumId,
         title: this.title,
         text: this.text
       })
+      this.$router.push({name: "ThreadShow", params: { id: thread.id}})
     },
   },
 };
