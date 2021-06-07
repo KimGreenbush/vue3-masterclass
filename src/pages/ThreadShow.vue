@@ -1,9 +1,21 @@
 <template>
   <div class="col-large push-top">
-    <router-link :to="{ name: 'Forum', params: { id: thread.forumId } }">
+    <router-link :to="{ name: 'Forum', params: { id: thread.forumId } }"
+    tag="button">
       Back to Forum
     </router-link>
-    <h1>{{ thread.title }}</h1>
+    <h1>
+      {{ thread.title }}
+
+    <router-link
+    :to="{ name: 'ThreadEdit', params: { id: thread.id } }"
+    class="btn-green btn-small"
+    tag="button">
+      Edit Thread
+    </router-link>
+
+    </h1>
+
 
     <PostList :posts="threadPosts" />
     <PostEditor @save="addPost" />
