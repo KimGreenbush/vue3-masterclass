@@ -1,5 +1,6 @@
 import { createStore } from "vuex";
 import sourceData from "@/data";
+import {findById} from "@/helpers"
 
 export default createStore({
 	state: {
@@ -8,7 +9,7 @@ export default createStore({
 	},
 	getters: {
 		authUser: (state) => {
-			const user = state.users.find((user) => user.id === state.authId);
+			const user = findById(state.users,  state.authId);
 			if (!user) return null;
 			return {
 				...user,
@@ -47,11 +48,11 @@ export default createStore({
 			commit("appendThreadToUser", { userId, threadId: id });
 			commit("appendThreadToForum", { forumId, threadId: id });
 			dispatch("createPost", { text, threadId: id });
-			return state.threads.find((thread) => thread.id === id);
+			return findById(state.threads, id);
 		},
 		async updateThread({ commit, state }, { title, text, id }) {
-			const thread = state.threads.find((thread) => thread.id === id);
-			const post = state.posts.find((post) => post.id === thread.posts[0]);
+			const thread = findById(state.threads, id);
+			const post = findById(state.posts, thread.posts[0]);
 			const newThread = { ...thread, title };
 			const newPost = { ...post, text };
 			commit("setThread", { thread: newThread });
@@ -80,21 +81,21 @@ export default createStore({
 			} else {state.threads.push(thread);}
 		},
 		appendPostToThread(state, { postId, threadId }) {
-			const thread = state.threads.find((thread) => thread.id === threadId);
+			const thread = findById(state.threads, threadId);
 			thread.posts = thread.posts || []; // ensure posts array exists before adding posts
 			thread.lastPostId = postId; // update when adding new posts
 			thread.posts.push(postId);
 		},
 		appendThreadToForum(state, { forumId, threadId }) {
-			const forum = state.forums.find((forum) => forum.id === forumId);
+			const forum = findById(state.forums, forumId);
 			forum.threads = forum.threads || []; // ensure threads array exists before adding threads
-			forum.lastPostId = state.threads.find((thread) => thread.id === threadId).lastPostId; // update when adding new posts
+			forum.lastPostId = findById(state.threads, threadId).lastPostId; // update when adding new posts
 			forum.threads.push(threadId);
 		},
 		appendThreadToUser(state, { userId, threadId }) {
-			const user = state.users.find((user) => user.id === userId);
+			const user = findById(state.users, userId);
 			user.threads = user.threads || []; // ensure threads array exists before adding threads
-			user.lastPostId = state.threads.find((thread) => thread.id === threadId).lastPostId; // update when adding new posts
+			user.lastPostId = findById(state.threads,  threadId).lastPostId; // update when adding new posts
 			user.threads.push(threadId);
 		},
 	},

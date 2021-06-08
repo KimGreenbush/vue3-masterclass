@@ -25,6 +25,7 @@
 <script>
 import PostList from "@/components/PostList";
 import PostEditor from "@/components/PostEditor";
+import {findById} from "@/helpers"
 
 export default {
   name: "ThreadShow",
@@ -39,17 +40,11 @@ export default {
     },
   },
   computed: {
-    threads() {
-      return this.$store.state.threads;
-    },
-    posts() {
-      return this.$store.state.posts;
-    },
     thread() {
-      return this.threads.find((thread) => thread.id === this.id);
+      return findById(this.$store.state.threads, this.id);
     },
     threadPosts() {
-      return this.posts.filter((post) => post.threadId === this.id);
+      return this.$store.state.posts.filter((post) => post.threadId === this.id);
     },
   },
   methods: {
