@@ -79,7 +79,7 @@
 export default {
   name: "UserProfileCardEditor",
   data() {
-    return { activeUser: { ...this.user } };
+    return { activeUser: { ...this.user } }
   },
   props: {
     user: {
@@ -89,14 +89,14 @@ export default {
   },
   methods: {
     save() {
-      this.$store.dispatch("updateUser", { ...this.activeUser });
-      this.$router.push({ name: "Profile" });
+      this.$store.dispatch("updateUser", { ...this.activeUser })
+      this.$router.push({ name: "Profile" })
     },
     cancel() {
-      this.$router.push({ name: "Profile" });
+      this.$router.push({ name: "Profile" })
     },
   },
-};
+}
 </script>
 
 <style scoped>

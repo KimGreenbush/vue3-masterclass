@@ -1,13 +1,13 @@
-import { createRouter, createWebHistory } from "vue-router";
-import Home from "@/pages/Home";
-import Forum from "@/pages/Forum";
-import Category from "@/pages/Category";
-import Profile from "@/pages/Profile";
-import ThreadShow from "@/pages/ThreadShow";
-import ThreadCreate from "@/pages/ThreadCreate";
-import ThreadEdit from "@/pages/ThreadEdit";
-import NotFound from "@/pages/NotFound";
-import sourceData from "@/data.json";
+import { createRouter, createWebHistory } from "vue-router"
+import Home from "@/pages/Home"
+import Forum from "@/pages/Forum"
+import Category from "@/pages/Category"
+import Profile from "@/pages/Profile"
+import ThreadShow from "@/pages/ThreadShow"
+import ThreadCreate from "@/pages/ThreadCreate"
+import ThreadEdit from "@/pages/ThreadEdit"
+import NotFound from "@/pages/NotFound"
+import sourceData from "@/data.json"
 import {findById} from "@/helpers/"
 
 const routes = [
@@ -50,7 +50,7 @@ const routes = [
 			const threadExists = findById(sourceData.threads, to.params.id);
 			// if exists
 			if (threadExists) {
-				return next();
+				return next()
 			}
 			// if Not Found
 			else {
@@ -81,7 +81,7 @@ const routes = [
 		name: "NotFound",
 		component: NotFound,
 	},
-];
+]
 
 export default createRouter({
 	history: createWebHistory(),
@@ -93,4 +93,4 @@ export default createRouter({
 		if (to.meta.smoothScroll) scroll.behavior = "smooth";
 		return scroll;
 	},
-});
+})

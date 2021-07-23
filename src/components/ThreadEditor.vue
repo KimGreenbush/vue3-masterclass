@@ -57,7 +57,7 @@ export default {
       this.$emit("save", {...this.form})
     }
   }
-};
+}
 </script>
 
 <style>

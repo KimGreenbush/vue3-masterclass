@@ -45,6 +45,7 @@
 
 <script>
 import {findById} from "@/helpers"
+
 export default {
   name: "ThreadList",
   props: {
@@ -55,21 +56,21 @@ export default {
   },
   computed: {
     posts() {
-      return this.$store.state.posts;
+      return this.$store.state.posts
     },
     users() {
-      return this.$store.state.users;
+      return this.$store.state.users
     },
   },
   methods: {
     postById(postId) {
-      return findById(this.posts, postId);
+      return findById(this.posts, postId)
     },
     userById(userId) {
-      return findById(this.users, userId);
+      return findById(this.users, userId)
     },
   },
-};
+}
 </script>
 
 <style scoped>

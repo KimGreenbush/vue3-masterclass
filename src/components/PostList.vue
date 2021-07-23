@@ -45,13 +45,13 @@ export default {
   },
   methods: {
     userById(userId) {
-      return findById(this.$store.state.users, userId);
+      return findById(this.$store.state.users, userId)
     },
     userPostNum(userId) {
-      return this.$store.state.posts.filter((u) => u.userId === userId).length;
+      return this.$store.state.posts.filter((u) => u.userId === userId).length
     },
   },
-};
+}
 </script>
 
 <style scoped>

@@ -5,11 +5,11 @@
 </template>
 
 <script>
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-import localDateTime from "dayjs/plugin/localizedFormat";
-dayjs.extend(relativeTime);
-dayjs.extend(localDateTime);
+import dayjs from "dayjs"
+import relativeTime from "dayjs/plugin/relativeTime"
+import localDateTime from "dayjs/plugin/localizedFormat"
+dayjs.extend(relativeTime)
+dayjs.extend(localDateTime)
 
 export default {
   name: "AppDate",
@@ -21,13 +21,13 @@ export default {
   },
   methods: {
     diffForHumans() {
-      return dayjs.unix(this.timestamp).fromNow();
+      return dayjs.unix(this.timestamp).fromNow()
     },
     humanDate() {
-      return dayjs.unix(this.timestamp).format("llll");
+      return dayjs.unix(this.timestamp).format("llll")
     },
   },
-};
+}
 </script>
 
 <style scoped>

@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import ThreadEditor from "@/components/ThreadEditor";
+import ThreadEditor from "@/components/ThreadEditor"
 import {findById} from "@/helpers"
 
 export default {
@@ -37,7 +37,7 @@ export default {
       this.$router.push({name: "ThreadShow", params: { id: this.thread.id}})
     }
   },
-};
+}
 </script>
 
 <style scoped>

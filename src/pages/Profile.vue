@@ -21,10 +21,10 @@
 </template>
 
 <script>
-import PostList from "@/components/PostList";
-import UserProfileCard from "@/components/UserProfileCard";
-import UserProfileCardEditor from "@/components/UserProfileCardEditor";
-import { mapGetters } from "vuex";
+import PostList from "@/components/PostList"
+import UserProfileCard from "@/components/UserProfileCard"
+import UserProfileCardEditor from "@/components/UserProfileCardEditor"
+import { mapGetters } from "vuex"
 
 export default {
   name: "Profile",
@@ -42,7 +42,7 @@ export default {
   computed: {
     ...mapGetters({ user: "authUser" }),
   },
-};
+}
 </script>
 
 <style>

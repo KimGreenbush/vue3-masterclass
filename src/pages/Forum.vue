@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import ThreadList from "@/components/ThreadList";
+import ThreadList from "@/components/ThreadList"
 import {findById} from "@/helpers"
 
 export default {
@@ -43,7 +43,7 @@ export default {
       );
     },
   },
-};
+}
 </script>
 
 <style scoped>

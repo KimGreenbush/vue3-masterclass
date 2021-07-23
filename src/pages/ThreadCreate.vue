@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import ThreadEditor from "@/components/ThreadEditor";
+import ThreadEditor from "@/components/ThreadEditor"
 import {findById} from "@/helpers"
 
 export default {
@@ -34,7 +34,7 @@ export default {
       this.$router.push({name: "Forum", params: {id: this.forumId}})
     }
   },
-};
+}
 </script>
 
 <style scoped>

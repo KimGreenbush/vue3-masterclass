@@ -16,7 +16,7 @@ export default {
       return this.$store.state.categories;
     },
   },
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

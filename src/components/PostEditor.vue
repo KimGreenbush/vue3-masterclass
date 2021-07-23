@@ -27,18 +27,18 @@ export default {
   data() {
     return {
       newPostText: "",
-    };
+    }
   },
   methods: {
     save() {
       const post = {
         text: this.newPostText,
-      };
-      this.$emit("save", { post }); // accessible object with kv pair: eventData.post
-      this.newPostText = "";
+      }
+      this.$emit("save", { post }) // accessible object with kv pair: eventData.post
+      this.newPostText = ""
     },
   },
-};
+}
 </script>
 
 <style scoped>
