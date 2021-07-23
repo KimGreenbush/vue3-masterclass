@@ -2,6 +2,15 @@ import { createStore } from "vuex";
 import sourceData from "@/data";
 import { findById, upsert } from "@/helpers"
 
+const makeAppendChildToParentMutation = ({child, parent}) => {
+	return (state, { childId, parentId }) => {
+		const resource = findById(state[parent], parentId);
+		resource[child] = resource[child] || [];
+		(parent === "threads") ? resource.lastPostId = childId : resource.lastPostId = findById(state[child], childId).lastPostId
+		resource[child].push(childId);
+	}
+}
+
 export default createStore({
 	state: {
 		...sourceData,
@@ -9,7 +18,7 @@ export default createStore({
 	},
 	getters: {
 		authUser: (state) => {
-			const user = findById(state.users,  state.authId);
+			const user = findById(state.users, state.authId);
 			if (!user) return null;
 			return {
 				...user,
@@ -30,14 +39,14 @@ export default createStore({
 		},
 	},
 	actions: {
-		// deconstructed {commit} out of
+		// deconstructed {commit, etc } out of context
 		//				  (       context,        payload)
 		createPost({ commit, state }, post) {
 			post.id = "ggg" + Math.random();
 			post.userId = state.authId;
 			post.publishedAt = Math.floor(Date.now() / 1000);
 			commit("setPost", { post });
-			commit("appendPostToThread", { postId: post.id, threadId: post.threadId });
+			commit("appendPostToThread", { childId: post.id, parentId: post.threadId });
 		},
 		async createThread({ commit, state, dispatch }, { text, title, forumId }) {
 			const id = "ggg" + Math.random();
@@ -45,8 +54,8 @@ export default createStore({
 			const publishedAt = Math.floor(Date.now() / 1000);
 			const thread = { forumId, publishedAt, title, userId, id };
 			commit("setThread", { thread });
-			commit("appendThreadToUser", { userId, threadId: id });
-			commit("appendThreadToForum", { forumId, threadId: id });
+			commit("appendThreadToUser", { childId: id, parentId: userId });
+			commit("appendThreadToForum", { childId: id, parentId: forumId });
 			dispatch("createPost", { text, threadId: id });
 			return findById(state.threads, id);
 		},
@@ -74,23 +83,8 @@ export default createStore({
 		setThread(state, { thread }) {
 			upsert(state.threads, thread);
 		},
-		appendPostToThread(state, { postId, threadId }) {
-			const thread = findById(state.threads, threadId);
-			thread.posts = thread.posts || []; // ensure posts array exists before adding posts
-			thread.lastPostId = postId; // update when adding new posts
-			thread.posts.push(postId);
-		},
-		appendThreadToForum(state, { forumId, threadId }) {
-			const forum = findById(state.forums, forumId);
-			forum.threads = forum.threads || []; // ensure threads array exists before adding threads
-			forum.lastPostId = findById(state.threads, threadId).lastPostId; // update when adding new posts
-			forum.threads.push(threadId);
-		},
-		appendThreadToUser(state, { userId, threadId }) {
-			const user = findById(state.users, userId);
-			user.threads = user.threads || []; // ensure threads array exists before adding threads
-			user.lastPostId = findById(state.threads,  threadId).lastPostId; // update when adding new posts
-			user.threads.push(threadId);
-		},
+		appendPostToThread: makeAppendChildToParentMutation({ child: "posts", parent: "threads" }),
+		appendThreadToForum: makeAppendChildToParentMutation({ child: "threads", parent: "forums" }),
+		appendThreadToUser: makeAppendChildToParentMutation({ child: "threads", parent: "users" }),
 	},
 });
