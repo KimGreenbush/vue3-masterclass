@@ -19,7 +19,7 @@
         </div>
 
         <div class="activity">
-          <p class="replies-count">{{ thread.posts.length }} replies</p>
+          <p class="replies-count">{{ thread.posts.length }} {{ thread.posts.length == 1 ? "post": "posts"}}</p>
 
           <img
             class="avatar-medium"
