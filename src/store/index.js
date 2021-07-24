@@ -5,11 +5,15 @@ import { findById, upsert } from "@/helpers"
 const makeAppendChildToParentMutation = ({ child, parent }) => {
 	return (state, { childId, parentId }) => {
 		const resource = findById(state[parent], parentId)
-		resource[child] =
-			resource[child] || [](parent === "threads")
-				? (resource.lastPostId = childId)
-				: (resource.lastPostId = findById(state[child], childId).lastPostId)
-		resource[child].push(childId)
+		resource[child] = resource[child] || []
+		if (child === "posts") {
+			resource.lastPostId = childId
+		} else if (child !== "contributors") {
+			resource.lastPostId = findById(state[child], childId).lastPostId
+		}
+		if (!resource[child].includes(childId)) {
+			resource[child].push(childId)
+		}
 	}
 }
 
@@ -44,9 +48,15 @@ export default createStore({
 				const thread = findById(state.threads, id)
 				return {
 					...thread,
-					author: "",
-					repliesCount: "",
-					contributorsCount: "",
+					get author() {
+						return findById(state.threads, thread.userId)
+					},
+					get repliesCount() {
+						return thread.posts.length - 1
+					},
+					get contributorsCount() {
+						return thread.contributors.length
+					},
 				}
 			}
 		},
@@ -60,6 +70,7 @@ export default createStore({
 			post.publishedAt = Math.floor(Date.now() / 1000)
 			commit("setPost", { post })
 			commit("appendPostToThread", { childId: post.id, parentId: post.threadId })
+			commit("appendContributorToThread", { childId: post.userId, parentId: post.threadId })
 		},
 		async createThread({ commit, state, dispatch }, { text, title, forumId }) {
 			const id = "ggg" + Math.random()
@@ -67,8 +78,8 @@ export default createStore({
 			const publishedAt = Math.floor(Date.now() / 1000)
 			const thread = { forumId, publishedAt, title, userId, id }
 			commit("setThread", { thread })
-			commit("appendThreadToUser", { childId: id, parentId: userId })
 			commit("appendThreadToForum", { childId: id, parentId: forumId })
+			commit("appendThreadToUser", { childId: id, parentId: userId })
 			dispatch("createPost", { text, threadId: id })
 			return findById(state.threads, id)
 		},
@@ -99,5 +110,6 @@ export default createStore({
 		appendPostToThread: makeAppendChildToParentMutation({ child: "posts", parent: "threads" }),
 		appendThreadToForum: makeAppendChildToParentMutation({ child: "threads", parent: "forums" }),
 		appendThreadToUser: makeAppendChildToParentMutation({ child: "threads", parent: "users" }),
+		appendContributorToThread: makeAppendChildToParentMutation({ child: "contributors", parent: "threads" }),
 	},
 })
