@@ -49,12 +49,13 @@ export default createStore({
 				return {
 					...thread,
 					get author() {
-						return findById(state.threads, thread.userId)
+						return findById(state.users, thread.userId)
 					},
 					get repliesCount() {
 						return thread.posts.length - 1
 					},
 					get contributorsCount() {
+						thread.contributors = thread.contributors || []
 						return thread.contributors.length
 					},
 				}
@@ -70,7 +71,10 @@ export default createStore({
 			post.publishedAt = Math.floor(Date.now() / 1000)
 			commit("setPost", { post })
 			commit("appendPostToThread", { childId: post.id, parentId: post.threadId })
-			commit("appendContributorToThread", { childId: post.userId, parentId: post.threadId })
+			const thread = findById(state.threads, post.threadId)
+			if (thread.userId !== post.userId) {
+				commit("appendContributorToThread", { childId: post.userId, parentId: post.threadId })
+			}
 		},
 		async createThread({ commit, state, dispatch }, { text, title, forumId }) {
 			const id = "ggg" + Math.random()
