@@ -88,7 +88,7 @@ export default createRouter({
 	routes,
 	scrollBehavior(to) {
 		const scroll = {};
-		// one like if statement
+		// one line if statement
 		if (to.meta.toTop) scroll.top = 0;
 		if (to.meta.smoothScroll) scroll.behavior = "smooth";
 		return scroll;

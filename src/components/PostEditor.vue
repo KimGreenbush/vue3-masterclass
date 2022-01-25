@@ -34,7 +34,7 @@ export default {
       const post = {
         text: this.newPostText,
       }
-      this.$emit("save", { post }) // accessible object with kv pair: eventData.post
+      this.$emit("save", { post }) // accessible object with kvp: eventData.post
       this.newPostText = ""
     },
   },

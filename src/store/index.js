@@ -8,6 +8,7 @@ const makeAppendChildToParentMutation = ({ child, parent }) => {
 		resource[child] = resource[child] || []
 		if (child === "posts") {
 			resource.lastPostId = childId
+			resource.lastPostAt = findById(state[child], childId).publishedAt
 		} else if (child !== "contributors") {
 			resource.lastPostId = findById(state[child], childId).lastPostId
 		}
@@ -23,24 +24,29 @@ export default createStore({
 		authId: "Miej9zSGMRZKDvMXzfxjVOyv3RF3",
 	},
 	getters: {
-		authUser: (state) => {
-			const user = findById(state.users, state.authId)
-			if (!user) return null
-			return {
-				...user,
-				// "get" keyword makes the functions accessible as properties
-				get posts() {
-					return state.posts.filter((post) => post.userId === user.id)
-				},
-				get postsCount() {
-					return this.posts.length
-				},
-				get threads() {
-					return state.threads.filter((thread) => thread.userId === user.id)
-				},
-				get threadsCount() {
-					return this.threads.length
-				},
+		authUser: (state, getters) => {
+			return getters.user(state.authId)
+		},
+		user: state => {
+			return (id) => {
+				const user = findById(state.users, id)
+				if (!user) return null
+				return {
+					...user,
+					// "get" keyword makes the functions accessible as properties
+					get posts() {
+						return state.posts.filter((post) => post.userId === user.id)
+					},
+					get postsCount() {
+						return this.posts.length
+					},
+					get threads() {
+						return state.threads.filter((thread) => thread.userId === user.id)
+					},
+					get threadsCount() {
+						return this.threads.length
+					},
+				}
 			}
 		},
 		thread: (state) => {

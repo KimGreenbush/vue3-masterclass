@@ -13,7 +13,10 @@
         </a>
 
         <p class="desktop-only text-small">
-          {{ userPostNum(post.userId) }} posts
+          {{ userById(post.userId).postsCount }} posts
+        </p>
+        <p class="desktop-only text-small">
+          {{ userById(post.userId).threadsCount }} threads
         </p>
       </div>
 
@@ -33,7 +36,6 @@
 </template>
 
 <script>
-import {findById} from "@/helpers"
 
 export default {
   name: "PostList",
@@ -45,10 +47,7 @@ export default {
   },
   methods: {
     userById(userId) {
-      return findById(this.$store.state.users, userId)
-    },
-    userPostNum(userId) {
-      return this.$store.state.posts.filter((u) => u.userId === userId).length
+      return this.$store.getters.user(userId)
     },
   },
 }

@@ -19,7 +19,7 @@
         </div>
 
         <div class="activity">
-          <p class="replies-count">{{ thread.posts.length }} {{ thread.posts.length == 1 ? "post": "posts"}}</p>
+          <p class="replies-count">{{ thread.repliesCount }} {{ thread.repliesCount == 1 ? "reply": "replies"}}</p>
 
           <img
             class="avatar-medium"
@@ -29,9 +29,9 @@
 
           <div>
             <p class="text-xsmall">
-              <a href="#">
+              <router-link :to="{ name: 'Profile' }">
                 {{ userById(postById(thread.lastPostId).userId).username }}
-              </a>
+              </router-link>
             </p>
             <p class="text-xsmall text-faded">
               <AppDate :timestamp="thread.lastPostAt" />
