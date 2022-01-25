@@ -16,6 +16,41 @@ export default {
       return this.$store.state.categories;
     },
   },
+  // Vue hooks!
+  // renders before instance is created, no access to data
+  beforeCreate() {
+    console.log("Before create hook!", this.categories); // categories is undefined in console
+  },
+  // renders when instance is created but before rendered to DOM,
+  // properties ARE available!
+  // Good time to fire AJAX calls (more time for call)
+  created() {
+    console.log(
+      "Created after instance but before rendered to DOM!",
+      this.categories
+    );
+  },
+  // template is compiled and virtual DOM is updated
+  // computations done before rendering to real DOM
+  beforeMount() {
+    console.log("Before mounting", this.categories, this.$el); // $el is null in console
+  },
+  // similart to jQuery ready(), instance has been mounted to real DOM
+  // access to $el property (contains DOM), access DOM properties like innerText
+  mounted() {
+    console.log("Mounted", this.categories, this.$el);
+  },
+  // before unmounting an instance (ex. v-if cond not met)
+  // component is functional and accessible inside function
+  // good spot for turning off event listeners
+  beforeUnmount() {
+    console.log("Before unmounting", this.categories, this.$el);
+  },
+  // usually not necessary
+  // you can send out messages that the component has been destroyed
+  unmounted() {
+    console.log("Unmounted", this.categories, this.$el);
+  },
 };
 </script>
 
