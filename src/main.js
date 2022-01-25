@@ -4,15 +4,16 @@ import router from "@/router" // direct import since file is named "index"
 import store from "@/store" // direct import since file is named "index"
 import firebaseConfig from "@/config/firebase"
 import { initializeApp } from "firebase/app"
+import { getFirestore } from "firebase/firestore"
 // import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Initialize Firebase
-initializeApp(firebaseConfig)
+// initializeApp(firebaseConfig)
 // Alt initialization for using anaylitics
-// const app = initializeApp(firebaseConfig);
-// const analytics = getAnalytics(app);
+const app = initializeApp(firebaseConfig);
+export const firestore = getFirestore(app);
 
 // extract app instance to a variable for isolation && customization before mounting (plugins, etc.)
 const firstApp = createApp(App)

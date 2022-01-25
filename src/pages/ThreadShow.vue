@@ -19,7 +19,7 @@
     </h1>
 
     <p>
-      By <a href="#" class="link-unstyled">{{ thread.author.name }}</a
+      By <a href="#" class="link-unstyled">{{ thread.author?.name }}</a
       >, <AppDate :timestamp="thread.publishedAt" />
       <span
         style="float: right; margin-top: 2px"
@@ -40,6 +40,8 @@
 <script>
 import PostList from "@/components/PostList";
 import PostEditor from "@/components/PostEditor";
+import { firestore } from "@/main";
+import { doc, onSnapshot } from "firebase/firestore";
 
 export default {
   name: "ThreadShow",
@@ -68,6 +70,34 @@ export default {
       const post = { ...eventData.post, threadId: this.id };
       this.$store.dispatch("createPost", post);
     },
+  },
+  created() {
+    // fetch firebase data
+    // thread
+    onSnapshot(doc(firestore, "threads", this.id), (doc) => {
+      const thread = { ...doc.data(), id: doc.id };
+      this.$store.commit("setThread", { thread });
+
+      // thread users
+      onSnapshot(doc(firestore, "users", thread.userId), (doc) => {
+        const user = { ...doc.data(), id: doc.id };
+        this.$store.commit("setUser", { user });
+      });
+
+      // thread posts
+      thread.posts.forEach((postId) => {
+        onSnapshot(doc(firestore, "posts", postId), (doc) => {
+          const post = { ...doc.data(), id: doc.id };
+          this.$store.commit("setPost", { post });
+
+          // thread posts users
+          onSnapshot(doc(firestore, "users", post.userId), (doc) => {
+            const user = { ...doc.data(), id: doc.id };
+            this.$store.commit("setUser", { user });
+          });
+        });
+      });
+    });
   },
 };
 </script>
