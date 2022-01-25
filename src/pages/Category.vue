@@ -5,7 +5,7 @@
 
 <script>
 import ForumList from "@/components/ForumList";
-import {findById} from "@/helpers"
+import { findById } from "@/helpers";
 
 export default {
   name: "Category",
@@ -30,7 +30,7 @@ export default {
       );
     },
   },
-}
+};
 </script>
 
 <style scoped>

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import ForumList from "@/components/ForumList"
+import ForumList from "@/components/ForumList";
 
 export default {
   name: "CategoryList",
@@ -26,10 +26,10 @@ export default {
     getForumsForCategory(category) {
       return this.$store.state.forums.filter(
         (forum) => forum.categoryId === category.id
-      )
+      );
     },
   },
-}
+};
 </script>
 
 <style>

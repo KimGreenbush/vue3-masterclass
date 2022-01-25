@@ -6,14 +6,14 @@
 </template>
 
 <script>
-import TheNavBar from "@/components/TheNavBar"
+import TheNavBar from "@/components/TheNavBar";
 
 export default {
   name: "App",
   components: {
     TheNavBar,
   },
-}
+};
 </script>
 
 <style>

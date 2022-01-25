@@ -13,13 +13,16 @@
             </router-link>
           </p>
           <p class="text-faded text-xsmall">
-            By <a href="#">{{ userById(thread.userId).name }}</a>,
-            <AppDate :timestamp="thread.publishedAt" />.
+            By <a href="#">{{ userById(thread.userId).name }}</a
+            >, <AppDate :timestamp="thread.publishedAt" />.
           </p>
         </div>
 
         <div class="activity">
-          <p class="replies-count">{{ thread.repliesCount }} {{ thread.repliesCount == 1 ? "reply": "replies"}}</p>
+          <p class="replies-count">
+            {{ thread.repliesCount }}
+            {{ thread.repliesCount == 1 ? "reply" : "replies" }}
+          </p>
 
           <img
             class="avatar-medium"
@@ -44,7 +47,7 @@
 </template>
 
 <script>
-import {findById} from "@/helpers"
+import { findById } from "@/helpers";
 
 export default {
   name: "ThreadList",
@@ -56,21 +59,21 @@ export default {
   },
   computed: {
     posts() {
-      return this.$store.state.posts
+      return this.$store.state.posts;
     },
     users() {
-      return this.$store.state.users
+      return this.$store.state.users;
     },
   },
   methods: {
     postById(postId) {
-      return findById(this.posts, postId)
+      return findById(this.posts, postId);
     },
     userById(userId) {
-      return findById(this.users, userId)
+      return findById(this.users, userId);
     },
   },
-}
+};
 </script>
 
 <style scoped>

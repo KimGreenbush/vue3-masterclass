@@ -52,8 +52,7 @@ export default {
       required: true,
     },
   },
-}
+};
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

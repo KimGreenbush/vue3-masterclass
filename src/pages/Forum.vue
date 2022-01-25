@@ -7,7 +7,8 @@
       </div>
       <router-link
         :to="{ name: 'ThreadCreate', params: { forumId: forum.id } }"
-        class="btn-green btn-small">
+        class="btn-green btn-small"
+      >
         Start a thread
       </router-link>
     </div>
@@ -19,8 +20,8 @@
 </template>
 
 <script>
-import ThreadList from "@/components/ThreadList"
-import {findById} from "@/helpers"
+import ThreadList from "@/components/ThreadList";
+import { findById } from "@/helpers";
 
 export default {
   name: "Forum",
@@ -38,10 +39,12 @@ export default {
       return findById(this.$store.state.forums, this.id);
     },
     threads() {
-      return this.forum.threads.map(threadId => this.$store.getters.thread(threadId));
+      return this.forum.threads.map((threadId) =>
+        this.$store.getters.thread(threadId)
+      );
     },
   },
-}
+};
 </script>
 
 <style scoped>

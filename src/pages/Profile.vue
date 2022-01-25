@@ -9,7 +9,9 @@
 
       <div class="col-7 push-top">
         <div class="profile-header">
-          <span class="text-lead"> {{ authUser.username || user.username }}'s recent activity </span>
+          <span class="text-lead">
+            {{ authUser.username || user.username }}'s recent activity
+          </span>
           <a href="#">See only started threads?</a>
         </div>
 
@@ -23,10 +25,10 @@
 </template>
 
 <script>
-import PostList from "@/components/PostList"
-import UserProfileCard from "@/components/UserProfileCard"
-import UserProfileCardEditor from "@/components/UserProfileCardEditor"
-import { mapGetters } from "vuex"
+import PostList from "@/components/PostList";
+import UserProfileCard from "@/components/UserProfileCard";
+import UserProfileCardEditor from "@/components/UserProfileCardEditor";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Profile",
@@ -45,7 +47,7 @@ export default {
     ...mapGetters({ authUser: "authUser" }),
     //...mapGetters({ user: "user" }),
   },
-}
+};
 </script>
 
 <style>

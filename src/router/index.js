@@ -8,7 +8,7 @@ import ThreadCreate from "@/pages/ThreadCreate"
 import ThreadEdit from "@/pages/ThreadEdit"
 import NotFound from "@/pages/NotFound"
 import sourceData from "@/data.json"
-import {findById} from "@/helpers/"
+import { findById } from "@/helpers/"
 
 const routes = [
 	{
@@ -47,7 +47,7 @@ const routes = [
 		props: true,
 		beforeEnter(to, from, next) {
 			// check if thread exists
-			const threadExists = findById(sourceData.threads, to.params.id);
+			const threadExists = findById(sourceData.threads, to.params.id)
 			// if exists
 			if (threadExists) {
 				return next()
@@ -59,12 +59,12 @@ const routes = [
 					params: { pathMatch: to.path.substring(1).split("/") },
 					query: to.query,
 					hash: to.hash,
-				});
+				})
 			}
 		},
 	},
 	{
-	//	path: "/thread/create",  this route is a direct route and can go after the prev one due to the updated router WARN: will not older vers of router
+		//	path: "/thread/create",  this route is a direct route and can go after the prev one due to the updated router WARN: will not older vers of router
 		path: "/forum/:forumId/thread/create",
 		name: "ThreadCreate",
 		component: ThreadCreate,
@@ -87,10 +87,10 @@ export default createRouter({
 	history: createWebHistory(),
 	routes,
 	scrollBehavior(to) {
-		const scroll = {};
+		const scroll = {}
 		// one line if statement
-		if (to.meta.toTop) scroll.top = 0;
-		if (to.meta.smoothScroll) scroll.behavior = "smooth";
-		return scroll;
+		if (to.meta.toTop) scroll.top = 0
+		if (to.meta.smoothScroll) scroll.behavior = "smooth"
+		return scroll
 	},
 })
