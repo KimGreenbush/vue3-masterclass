@@ -6,15 +6,12 @@
       <div v-for="thread in threads" :key="thread.id" class="thread">
         <div>
           <p>
-            <router-link
-              :to="{ name: 'ThreadShow', params: { id: thread.id } }"
-            >
-              {{ thread.title }}
-            </router-link>
+            <router-link :to="{ name: 'ThreadShow', params: { id: thread.id } }">{{ thread.title }}</router-link>
           </p>
           <p class="text-faded text-xsmall">
-            By <a href="#">{{ userById(thread.userId).name }}</a
-            >, <AppDate :timestamp="thread.publishedAt" />.
+            By
+            <a href="#">{{ userById(thread.userId).name }}</a>,
+            <AppDate :timestamp="thread.publishedAt" />.
           </p>
         </div>
 
@@ -24,17 +21,13 @@
             {{ thread.repliesCount == 1 ? "reply" : "replies" }}
           </p>
 
-          <img
-            class="avatar-medium"
-            :src="userById(postById(thread.lastPostId).userId).avatar"
-            alt=""
-          />
+          <img class="avatar-medium" :src="userById(postById(thread.lastPostId).userId).avatar" alt />
 
           <div>
             <p class="text-xsmall">
-              <router-link :to="{ name: 'Profile' }">
-                {{ userById(postById(thread.lastPostId).userId).username }}
-              </router-link>
+              <router-link
+                :to="{ name: 'Profile' }"
+              >{{ userById(postById(thread.lastPostId).userId).username }}</router-link>
             </p>
             <p class="text-xsmall text-faded">
               <AppDate :timestamp="thread.lastPostAt" />

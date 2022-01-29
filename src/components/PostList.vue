@@ -5,26 +5,16 @@
         <a href="#" class="user-name">{{ userById(post.userId).name }}</a>
 
         <a href="#">
-          <img
-            class="avatar-large"
-            :src="userById(post.userId).avatar"
-            alt=""
-          />
+          <img class="avatar-large" :src="userById(post.userId).avatar" alt />
         </a>
 
-        <p class="desktop-only text-small">
-          {{ userById(post.userId).postsCount }} posts
-        </p>
-        <p class="desktop-only text-small">
-          {{ userById(post.userId).threadsCount }} threads
-        </p>
+        <p class="desktop-only text-small">{{ userById(post.userId).postsCount }} {{ userById(post.userId).postsCount == 1 ? "post" : "posts"}} </p>
+        <p class="desktop-only text-small">{{ userById(post.userId).threadsCount }} {{ userById(post.userId).threadsCount == 1 ? "thread" : "threads"}}</p>
       </div>
 
       <div class="post-content">
         <div>
-          <p>
-            {{ post.text }}
-          </p>
+          <p>{{ post.text }}</p>
         </div>
       </div>
 

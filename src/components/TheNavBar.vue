@@ -26,7 +26,7 @@
               <img
                 class="icon-profile"
                 src="../assets/svg/arrow-profile.svg"
-                alt=""
+                alt
               />
             </span>
           </router-link>
@@ -39,7 +39,9 @@
               <li class="dropdown-menu-item">
                 <a href="#">View profile</a>
               </li>
-              <li class="dropdown-menu-item"><a href="#">Log out</a></li>
+              <li class="dropdown-menu-item">
+                <a href="#">Log out</a>
+              </li>
             </ul>
           </div>
         </li>
@@ -65,7 +67,7 @@
         <li class="navbar-item mobile-only">
           <a href="#">Logout</a>
         </li>
-      </ul> -->
+      </ul>-->
     </nav>
   </header>
 </template>

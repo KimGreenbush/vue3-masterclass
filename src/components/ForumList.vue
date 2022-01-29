@@ -4,8 +4,7 @@
       <router-link
         v-if="categoryId"
         :to="{ name: 'Category', params: { id: categoryId } }"
-        >{{ title }}</router-link
-      >
+      >{{ title }}</router-link>
       <span v-else>{{ title }}</span>
     </h2>
 
@@ -14,9 +13,7 @@
         <router-link
           class="text-xlarge"
           :to="{ name: 'Forum', params: { id: forum.id } }"
-        >
-          {{ forum.name }}
-        </router-link>
+        >{{ forum.name }}</router-link>
         <p>{{ forum.description }}</p>
       </div>
 
@@ -31,7 +28,7 @@
         <img
           class="avatar"
           src="https://pbs.twimg.com/profile_images/719242842598699008/Nu43rQz1_400x400.jpg"
-          alt=""
+          alt
         />
         <div class="last-thread-details"></div>
       </div>

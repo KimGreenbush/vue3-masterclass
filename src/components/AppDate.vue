@@ -1,7 +1,5 @@
 <template>
-  <span :title="humanDate()">
-    {{ diffForHumans() }}
-  </span>
+  <span :title="humanDate()">{{ diffForHumans() }}</span>
 </template>
 
 <script>

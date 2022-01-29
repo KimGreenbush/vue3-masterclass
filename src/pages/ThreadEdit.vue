@@ -1,15 +1,11 @@
 <template>
   <div class="col-full push-top">
     <h1>
-      Editing <i>{{ thread.title }}</i>
+      Editing
+      <i>{{ thread.title }}</i>
     </h1>
 
-    <ThreadEditor
-      :title="thread.title"
-      :text="text"
-      @save="save"
-      @cancel="cancel"
-    />
+    <ThreadEditor :title="thread.title" :text="text" @save="save" @cancel="cancel" />
   </div>
 </template>
 

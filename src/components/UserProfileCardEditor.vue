@@ -39,22 +39,12 @@
 
       <div class="form-group">
         <label class="form-label" for="user_website">Website</label>
-        <input
-          autocomplete="off"
-          class="form-input"
-          id="user_website"
-          v-model="activeUser.website"
-        />
+        <input autocomplete="off" class="form-input" id="user_website" v-model="activeUser.website" />
       </div>
 
       <div class="form-group">
         <label class="form-label" for="user_email">Email</label>
-        <input
-          autocomplete="off"
-          class="form-input"
-          id="user_email"
-          v-model="activeUser.email"
-        />
+        <input autocomplete="off" class="form-input" id="user_email" v-model="activeUser.email" />
       </div>
 
       <div class="form-group">

@@ -1,11 +1,7 @@
 <template>
   <div class="profile-card">
     <p class="text-center">
-      <img
-        :src="user.avatar"
-        alt="`{user.name} profile picture`"
-        class="avatar-xlarge"
-      />
+      <img :src="user.avatar" alt="`{user.name} profile picture`" class="avatar-xlarge" />
     </p>
 
     <h1 class="title">{{ user.username }}</h1>
@@ -26,7 +22,8 @@
     <hr />
 
     <p v-if="user.website" class="text-large text-center">
-      <i class="fa fa-globe"></i> <a :href="user.website">{{ user.website }}</a>
+      <i class="fa fa-globe"></i>
+      <a :href="user.website">{{ user.website }}</a>
     </p>
   </div>
 
@@ -37,9 +34,7 @@
   <hr />
 
   <div class="text-center">
-    <router-link :to="{ name: 'ProfileEdit' }" class="btn-green btn-small">
-      Edit Profile
-    </router-link>
+    <router-link :to="{ name: 'ProfileEdit' }" class="btn-green btn-small">Edit Profile</router-link>
   </div>
 </template>
 
