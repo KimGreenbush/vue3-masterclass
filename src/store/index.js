@@ -1,5 +1,7 @@
 import { createStore } from "vuex"
 import { findById, upsert } from "@/helpers"
+import { firestore } from "@/main"
+import { doc, onSnapshot } from "firebase/firestore"
 
 const makeAppendChildToParentMutation = ({ child, parent }) => {
 	return (state, { childId, parentId }) => {
@@ -107,6 +109,33 @@ export default createStore({
 		},
 		updateUser({ commit }, user) {
 			commit("setUser", { user, userId: user.id })
+		},
+		fetchThread({ commit }, { id }) {
+			return new Promise((resolve) => {
+				onSnapshot(doc(firestore, "threads", id), (doc) => {
+					const thread = { ...doc.data(), id: doc.id }
+					commit("setThread", { thread })
+					resolve(thread)
+				})
+			})
+		},
+		fetchUser({ commit }, { id }) {
+			return new Promise((resolve) => {
+				onSnapshot(doc(firestore, "users", id), (doc) => {
+					const user = { ...doc.data(), id: doc.id }
+					commit("setUser", { user })
+					resolve(user)
+				})
+			})
+		},
+		fetchPost({ commit }, { id }) {
+			return new Promise((resolve) => {
+				onSnapshot(doc(firestore, "posts", id), (doc) => {
+					const post = { ...doc.data(), id: doc.id }
+					commit("setPost", { post })
+					resolve(post)
+				})
+			})
 		},
 	},
 	mutations: {
