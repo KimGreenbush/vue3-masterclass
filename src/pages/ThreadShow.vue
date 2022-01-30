@@ -44,6 +44,12 @@ export default {
     },
   },
   computed: {
+    // threads () {
+    //   return this.$store.state.threads
+    // },
+    // posts () {
+    //   return this.$store.state.posts
+    // },
     thread() {
       return this.$store.getters.thread(this.id);
     },
