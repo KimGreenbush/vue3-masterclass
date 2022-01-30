@@ -39,6 +39,7 @@ export default createStore({
 				return {
 					...user,
 					// "get" keyword makes the functions accessible as properties
+					// think C# {get;}
 					get posts() {
 						return state.posts.filter((post) => post.userId === user.id)
 					},
@@ -77,24 +78,21 @@ export default createStore({
 		// deconstructed {commit, etc } out of context
 		//				  (       context,        payload)
 		createPost({ commit, state }, post) {
-			post.id = "ggg" + Math.random()
+			post.id = "nsg" + Math.random()
 			post.userId = state.authId
 			post.publishedAt = Math.floor(Date.now() / 1000)
-			commit("setPost", { post })
+			commit("setItem", { resource: "posts", item: post })
 			commit("appendPostToThread", { childId: post.id, parentId: post.threadId })
-			const thread = findById(state.threads, post.threadId)
-			if (thread.userId !== post.userId) {
-				commit("appendContributorToThread", { childId: post.userId, parentId: post.threadId })
-			}
+			commit("appendContributorToThread", { childId: post.userId, parentId: post.threadId })
 		},
 		async createThread({ commit, state, dispatch }, { text, title, forumId }) {
 			const id = "ggg" + Math.random()
 			const userId = state.authId
 			const publishedAt = Math.floor(Date.now() / 1000)
 			const thread = { forumId, publishedAt, title, userId, id }
-			commit("setThread", { thread })
-			commit("appendThreadToForum", { childId: id, parentId: forumId })
+			commit("setItem", { resource: "threads", item: thread })
 			commit("appendThreadToUser", { childId: id, parentId: userId })
+			commit("appendThreadToForum", { childId: id, parentId: forumId })
 			dispatch("createPost", { text, threadId: id })
 			return findById(state.threads, id)
 		},
@@ -103,50 +101,38 @@ export default createStore({
 			const post = findById(state.posts, thread.posts[0])
 			const newThread = { ...thread, title }
 			const newPost = { ...post, text }
-			commit("setThread", { thread: newThread })
-			commit("setPost", { post: newPost })
+			commit("setItem", { resource: "threads", item: newThread })
+			commit("setItem", { resource: "posts", item: newPost })
 			return newThread
 		},
 		updateUser({ commit }, user) {
-			commit("setUser", { user, userId: user.id })
+			commit("setItem", { resource: "users", item: user })
 		},
-		fetchThread({ commit }, { id }) {
-			return new Promise((resolve) => {
-				onSnapshot(doc(firestore, "threads", id), (doc) => {
-					const thread = { ...doc.data(), id: doc.id }
-					commit("setThread", { thread })
-					resolve(thread)
-				})
-			})
+		fetchForum({ dispatch }, { id }) {
+			return dispatch("fetchItem", { resource: "forums", id })
 		},
-		fetchUser({ commit }, { id }) {
-			return new Promise((resolve) => {
-				onSnapshot(doc(firestore, "users", id), (doc) => {
-					const user = { ...doc.data(), id: doc.id }
-					commit("setUser", { user })
-					resolve(user)
-				})
-			})
+		fetchThread({ dispatch }, { id }) {
+			return dispatch("fetchItem", { resource: "threads", id })
 		},
-		fetchPost({ commit }, { id }) {
+		fetchUser({ dispatch }, { id }) {
+			return dispatch("fetchItem", { resource: "users", id })
+		},
+		fetchPost({ dispatch }, { id }) {
+			return dispatch("fetchItem", { resource: "posts", id })
+		},
+		fetchItem({ commit }, { resource, id }) {
 			return new Promise((resolve) => {
-				onSnapshot(doc(firestore, "posts", id), (doc) => {
-					const post = { ...doc.data(), id: doc.id }
-					commit("setPost", { post })
-					resolve(post)
+				onSnapshot(doc(firestore, resource, id), (doc) => {
+					const item = { ...doc.data(), id: doc.id }
+					commit("setItem", { resource, item })
+					resolve(item)
 				})
 			})
 		},
 	},
 	mutations: {
-		setUser(state, { user }) {
-			upsert(state.users, user)
-		},
-		setPost(state, { post }) {
-			upsert(state.posts, post)
-		},
-		setThread(state, { thread }) {
-			upsert(state.threads, thread)
+		setItem(state, { resource, item }) {
+			upsert(state[resource], item)
 		},
 		appendPostToThread: makeAppendChildToParentMutation({ child: "posts", parent: "threads" }),
 		appendThreadToForum: makeAppendChildToParentMutation({ child: "threads", parent: "forums" }),
