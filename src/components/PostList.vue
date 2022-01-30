@@ -8,8 +8,14 @@
           <img class="avatar-large" :src="userById(post.userId).avatar" alt />
         </a>
 
-        <p class="desktop-only text-small">{{ userById(post.userId).postsCount }} {{ userById(post.userId).postsCount == 1 ? "post" : "posts"}} </p>
-        <p class="desktop-only text-small">{{ userById(post.userId).threadsCount }} {{ userById(post.userId).threadsCount == 1 ? "thread" : "threads"}}</p>
+        <p class="desktop-only text-small">
+          {{ userById(post.userId).postsCount }}
+          {{ userById(post.userId).postsCount == 1 ? "post" : "posts" }}
+        </p>
+        <p class="desktop-only text-small">
+          {{ userById(post.userId).threadsCount }}
+          {{ userById(post.userId).threadsCount == 1 ? "thread" : "threads" }}
+        </p>
       </div>
 
       <div class="post-content">
